@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cyberX — Ultimate Directory & Language Cheat Sheet Hub</title>
+  <style>
+    :root {
+      --bg: #080b0f;
+      --card-bg: #131720;
+      --code-bg: #0d1117;
+      --border: #262c36;
+      --accent: #00f2fe;
+      --accent-purple: #7928ca;
+      --text: #f0f6fc;
+      --muted: #8b949e;
+      --success: #00e676;
+      --keyword: #ff7b72;
+      --string: #a5d6ff;
+      --comment: #8b949e;
+      --function: #d2a8ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Header */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%; border-bottom: 1px solid var(--border);
+      background: rgba(8, 11, 15, 0.95); backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+    .brand-title { font-size: 1.6rem; font-weight: 800; }
+    .brand-title span { background: linear-gradient(135deg, #00f2fe, #7928ca); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .header-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .author-badge { font-size: 0.85rem; color: var(--muted); border-right: 1px solid var(--border); padding-right: 1rem; }
+    .author-badge strong { color: var(--accent); }
+
+    .btn-nav {
+      background: rgba(0, 242, 254, 0.1); border: 1px solid var(--accent);
+      color: var(--accent); padding: 0.4rem 0.9rem; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: 0.2s;
+    }
+    .btn-nav:hover { background: var(--accent); color: #000; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 4rem 5% 2rem; max-width: 1000px; margin: 0 auto; }
+    .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.2rem; }
+    .hero h1 span { background: linear-gradient(90deg, #00f2fe, #7928ca, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.15rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+    section { max-width: 1250px; margin: 0 auto; padding: 3rem 5%; }
+    .section-title { font-size: 2.2rem; margin-bottom: 0.5rem; text-align: center; }
+    .section-subtitle { text-align: center; color: var(--muted); margin-bottom: 2.5rem; }
+
+    .cat-title { font-size: 1.3rem; color: var(--accent); margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Grids & Cards */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: 0.3s; position: relative; }
+    .card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.8rem; }
+    .card-icon { font-size: 1.8rem; }
+    .card-title { font-size: 1.2rem; font-weight: 700; color: #fff; }
+
+    .card-desc { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+
+    .link-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .link-list a { color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .link-list a:hover { color: #fff; text-decoration: underline; }
+
+    /* Directory Tables / Grid Lists */
+    .directory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+    .dir-link { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 0.88rem; text-align: center; transition: 0.2s; gap: 4px; }
+    .dir-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,242,254,0.05); transform: translateY(-2px); }
+    .dir-link span.sub { font-size: 0.72rem; color: var(--muted); }
+
+    /* Code & Cheat Sheet Styling */
+    .cheat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .cheat-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .lang-badge { background: rgba(0, 242, 254, 0.15); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase; }
+    
+    pre.code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.82rem;
+      color: #e6edf3;
+      overflow-x: auto;
+      line-height: 1.45;
+    }
+
+    .k { color: var(--keyword); }
+    .s { color: var(--string); }
+    .c { color: var(--comment); }
+    .f { color: var(--function); }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); background: #040608; padding: 4rem 5% 2rem; margin-top: 4rem; }
+    .footer-content { max-width: 1250px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; margin-bottom: 3rem; }
+    .footer-col h4 { color: #fff; margin-bottom: 1.2rem; font-size: 1.1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+
+    .author-box {
+      background: rgba(0,242,254,0.05); border: 1px solid var(--accent);
+      border-radius: 12px; padding: 2rem; text-align: center; max-width: 800px; margin: 0 auto 3rem;
+    }
+    .author-box h3 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1.4rem; }
+    .author-box p { color: var(--text); font-size: 1rem; }
+
+    .footer-copy { text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand">
+      <svg width="38" height="38" viewBox="0 0 100 100" fill="none">
+        <rect width="100" height="100" rx="22" fill="#161B22"/>
+        <rect x="2" y="2" width="96" height="96" rx="20" stroke="url(#logo-grad)" stroke-width="3"/>
+        <path d="M30 30L42 50L30 70" stroke="#00F2FE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M70 30L58 50L70 70" stroke="#00F2FE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="50" cy="50" r="6" fill="#7928CA"/>
+        <defs>
+          <linearGradient id="logo-grad" x1="0" y1="0" x2="100" y2="100">
+            <stop offset="0%" stop-color="#00F2FE"/>
+            <stop offset="100%" stop-color="#7928CA"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="brand-title">cyber<span>X</span></div>
+    </a>
+
+    <div class="header-right">
+      <div class="author-badge">Platform Author: <strong>cyberX Engineering Team</strong></div>
+      <a href="#os-downloads" class="btn-nav">🌐 OS ISO Downloads</a>
+      <a href="#languages" class="btn-nav">💻 Programming Languages</a>
+      <a href="#cheatsheets" class="btn-nav">⚡ Code Snippets</a>
+      <a href="cyberx_guide.pdf" download class="btn-nav" style="background:var(--accent); color:#000;">📥 Context PDF</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Banner -->
+    <section class="hero">
+      <h1>Global Operating Systems & Programming <span>Archive</span></h1>
+      <p>Explore every major operating system from early mainframes to modern security platforms, paired with direct interactive cheat sheet references for all programming languages.</p>
+    </section>
+
+    <!-- Operating Systems Archive -->
+    <section id="os-downloads">
+      <h2 class="section-title">🖥️ Comprehensive Operating Systems Archive</h2>
+      <p class="section-subtitle">Official ISO image direct links, historical documentation, and live portals.</p>
+
+      <!-- OS Category 1: Modern Desktop & Commercial -->
+      <div class="cat-title">
+        <span>1. Modern Commercial Operating Systems</span>
+        <span style="font-size:0.85rem; color:var(--muted);">Desktop & Enterprise</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🪟</span><div class="card-title">Microsoft Windows</div></div>
+          <p class="card-desc">Windows 11, Windows 10, Windows Server, and Windows Subsystem for Linux (WSL).</p>
+          <div class="link-list">
+            <a href="https://www.microsoft.com/software-download/windows11" target="_blank">⬇️ Windows 11 Official ISO Download</a>
+            <a href="https://www.microsoft.com/software-download/windows10" target="_blank">⬇️ Windows 10 ISO / Media Creation</a>
+            <a href="https://www.microsoft.com/evalcenter/evaluate-windows-server-2022" target="_blank">🌐 Windows Server 2022 Evaluation</a>
+            <a href="https://en.wikipedia.org/wiki/Microsoft_Windows" target="_blank">📖 Wikipedia History</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🍎</span><div class="card-title">Apple macOS & iOS</div></div>
+          <p class="card-desc">Darwin/BSD-based operating system powering Apple Mac hardware.</p>
+          <div class="link-list">
+            <a href="https://support.apple.com/downloads/macos" target="_blank">🌐 Official macOS Download Center</a>
+            <a href="https://developer.apple.com/macos/" target="_blank">💻 Apple Developer Documentation</a>
+            <a href="https://en.wikipedia.org/wiki/MacOS" target="_blank">📖 Wikipedia History & Versions</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🤖</span><div class="card-title">Android & ChromeOS</div></div>
+          <p class="card-desc">Linux kernel-based operating systems for mobile devices, tablets, and Chromebooks.</p>
+          <div class="link-list">
+            <a href="https://developer.android.com/about/versions" target="_blank">🌐 Android Source & SDK Downloads</a>
+            <a href="https://chromeos.google.com/" target="_blank">🌐 ChromeOS Flex Installation Portal</a>
+            <a href="https://en.wikipedia.org/wiki/Android_(operating_system)" target="_blank">📖 Wikipedia History</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- OS Category 2: Linux Distributions & Cybersecurity OS -->
+      <div class="cat-title">
+        <span>2. Linux Distributions & Cybersecurity OS</span>
+        <span style="font-size:0.85rem; color:var(--muted);">Open Source & Penetration Testing</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🐉</span><div class="card-title">Kali Linux</div></div>
+          <p class="card-desc">Debian-derived distribution designed for digital forensics and penetration testing.</p>
+          <div class="link-list">
+            <a href="https://www.kali.org/get-kali/" target="_blank">⬇️ Download Kali Linux ISO / VM Images</a>
+            <a href="https://www.kali.org/docs/" target="_blank">📖 Official Kali Documentation</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🦜</span><div class="card-title">Parrot Security OS</div></div>
+          <p class="card-desc">Security-oriented OS for cyber operations, ethical hacking, and privacy shielding.</p>
+          <div class="link-list">
+            <a href="https://parrotsec.org/download/" target="_blank">⬇️ Download Parrot Security ISO</a>
+            <a href="https://parrotsec.org/docs/" target="_blank">📖 Official Parrot OS Documentation</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🐧</span><div class="card-title">Ubuntu & Debian</div></div>
+          <p class="card-desc">The most widely used server and desktop Linux distributions in the world.</p>
+          <div class="link-list">
+            <a href="https://ubuntu.com/download/desktop" target="_blank">⬇️ Ubuntu Desktop Official ISO</a>
+            <a href="https://www.debian.org/distrib/" target="_blank">⬇️ Debian GNU/Linux Official ISO</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🏔️</span><div class="card-title">Arch Linux & Fedora</div></div>
+          <p class="card-desc">Lightweight rolling-release distribution alongside Red Hat's flagship Fedora workstation.</p>
+          <div class="link-list">
+            <a href="https://archlinux.org/download/" target="_blank">⬇️ Arch Linux ISO Download</a>
+            <a href="https://fedoraproject.org/" target="_blank">⬇️ Fedora Workstation ISO Download</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- OS Category 3: Historical Operating Systems -->
+      <div class="cat-title">
+        <span>3. Historical & Vintage Operating Systems (1950s - 1990s)</span>
+        <span style="font-size:0.85rem; color:var(--muted);">Legacy Archives</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-header"><span class="card-icon">📜</span><div class="card-title">UNIX & BSD Pioneers</div></div>
+          <p class="card-desc">AT&T Bell Labs Unix, Research Unix, Version 7, and Early 4.4BSD.</p>
+          <div class="link-list">
+            <a href="https://www.freebsd.org/where/" target="_blank">⬇️ Download FreeBSD ISO</a>
+            <a href="https://www.openbsd.org/faq/faq3.html" target="_blank">⬇️ Download OpenBSD ISO</a>
+            <a href="https://en.wikipedia.org/wiki/Unix" target="_blank">📖 Wikipedia: Unix History</a>
+            <a href="https://www.bell-labs.com/usr/dmr/www/hist.html" target="_blank">🏛️ Bell Labs Unix Archives</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">💾</span><div class="card-title">MS-DOS & CP/M</div></div>
+          <p class="card-desc">Disk Operating Systems that defined personal computing in the late 1970s and 1980s.</p>
+          <div class="link-list">
+            <a href="https://github.com/microsoft/ms-dos" target="_blank">💻 Microsoft Official MS-DOS Source Code</a>
+            <a href="https://en.wikipedia.org/wiki/MS-DOS" target="_blank">📖 Wikipedia: MS-DOS Entry</a>
+            <a href="https://en.wikipedia.org/wiki/CP/M" target="_blank">📖 Wikipedia: CP/M History</a>
+            <a href="https://www.freedos.org/download/" target="_blank">⬇️ FreeDOS ISO Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🏛️</span><div class="card-title">Early Mainframe OS (1950s - 60s)</div></div>
+          <p class="card-desc">GM-NAA I/O, IBM OS/360, Multics, and CTSS—the foundation of modern multitasking.</p>
+          <div class="link-list">
+            <a href="https://en.wikipedia.org/wiki/GM-NAA_I/O" target="_blank">📖 GM-NAA I/O (1st OS - 1956)</a>
+            <a href="https://en.wikipedia.org/wiki/OS/360_and_successors" target="_blank">📖 IBM OS/360 History</a>
+            <a href="https://multicians.org/" target="_blank">🏛️ Multics Historical Archive</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programming & Cybersecurity Languages with Cheat Sheet Links -->
+    <section id="languages">
+      <h2 class="section-title">💻 Programming Languages & Cheat Sheet Hub</h2>
+      <p class="section-subtitle">Direct links to official documentation, Wikipedia history, and full syntax cheat sheets.</p>
+
+      <div class="cat-title">
+        <span>Featured Core Languages & Frameworks</span>
+      </div>
+      <div class="grid">
+
+        <!-- Python -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🐍</span><div class="card-title">Python</div></div>
+          <p class="card-desc">Primary language for cyber automation, socket programming, exploit dev, and data analysis.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/python" target="_blank">⚡ Python Full QuickRef Cheat Sheet</a>
+            <a href="https://learnxinyminutes.com/docs/python/" target="_blank">⚡ Learn Python in Y Minutes</a>
+            <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://greenteapress.com/wp/think-python-2e/" target="_blank">📚 Free Book: Think Python</a>
+            <a href="https://www.python.org/" target="_blank">🌐 Official Python Site</a>
+          </div>
+        </div>
+
+        <!-- Bash -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">💻</span><div class="card-title">Bash / Shell Scripting</div></div>
+          <p class="card-desc">Terminal automation language for Linux administration, system diagnostics, and pipeline chaining.</p>
+          <div class="link-list">
+            <a href="https://devhints.io/bash" target="_blank">⚡ Bash Devhints Cheat Sheet</a>
+            <a href="https://quickref.me/bash" target="_blank">⚡ Bash Syntax Quick Reference</a>
+            <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://linuxcommand.org/tlcl.php" target="_blank">📚 Free Book: The Linux Command Line</a>
+          </div>
+        </div>
+
+        <!-- Go -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🐹</span><div class="card-title">Go (Golang)</div></div>
+          <p class="card-desc">High-speed compiled concurrency language powering microservices, Docker, and fast scanners.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/golang" target="_blank">⚡ Go QuickRef Cheat Sheet</a>
+            <a href="https://learnxinyminutes.com/docs/go/" target="_blank">⚡ Learn Go in Y Minutes</a>
+            <a href="https://en.wikipedia.org/wiki/Go_(programming_language)" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://go.dev/doc/" target="_blank">🌐 Official Go Docs & Tutorials</a>
+          </div>
+        </div>
+
+        <!-- C -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">⚙️</span><div class="card-title">C Language</div></div>
+          <p class="card-desc">Low-level systems language used for building kernels, embedded drivers, and operating systems.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/c" target="_blank">⚡ C Syntax Quick Reference Cheat Sheet</a>
+            <a href="https://learnxinyminutes.com/docs/c/" target="_blank">⚡ Learn C in Y Minutes</a>
+            <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://en.cppreference.com/w/c" target="_blank">🌐 Official C Reference Docs</a>
+          </div>
+        </div>
+
+        <!-- C++ -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🚀</span><div class="card-title">C++</div></div>
+          <p class="card-desc">High-performance multi-paradigm object-oriented language for game engines, browsers, and security tools.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/cpp" target="_blank">⚡ C++ QuickRef Cheat Sheet</a>
+            <a href="https://learnxinyminutes.com/docs/cpp/" target="_blank">⚡ Learn C++ in Y Minutes</a>
+            <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://isocpp.org/" target="_blank">🌐 ISO C++ Standard Community</a>
+          </div>
+        </div>
+
+        <!-- Rust -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🦀</span><div class="card-title">Rust</div></div>
+          <p class="card-desc">Memory-safe systems programming language preventing buffer overflows, use-after-free, and race conditions.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/rust" target="_blank">⚡ Rust QuickRef Cheat Sheet</a>
+            <a href="https://cheats.rs/" target="_blank">⚡ Rust Language Cheat Sheet Portal</a>
+            <a href="https://en.wikipedia.org/wiki/Rust_(programming_language)" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://doc.rust-lang.org/book/" target="_blank">📚 Official Rust Book</a>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">⚡</span><div class="card-title">JavaScript & Node.js</div></div>
+          <p class="card-desc">Client-side web engine and server runtime driving interactive applications, APIs, and WebSockets.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/javascript" target="_blank">⚡ JavaScript QuickRef Cheat Sheet</a>
+            <a href="https://htmlcheatsheet.com/js/" target="_blank">⚡ Interactive JS Syntax Cheat Sheet</a>
+            <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">📖 Wikipedia Entry</a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">🌐 MDN Web Docs</a>
+          </div>
+        </div>
+
+        <!-- SQL -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🗄️</span><div class="card-title">SQL (Structured Query Lang)</div></div>
+          <p class="card-desc">Standard database language for creating, querying, updating, and securing relational database management systems.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/sql" target="_blank">⚡ SQL Command QuickRef Cheat Sheet</a>
+            <a href="https://sqltutorial.org/sql-cheat-sheet/" target="_blank">⚡ SQL Syntax Cheat Sheet PDF</a>
+            <a href="https://en.wikipedia.org/wiki/SQL" target="_blank">📖 Wikipedia Entry</a>
+          </div>
+        </div>
+
+        <!-- Assembly -->
+        <div class="card">
+          <div class="card-header"><span class="card-icon">🛠️</span><div class="card-title">Assembly (x86 / ARM)</div></div>
+          <p class="card-desc">Direct machine hardware instructions used in reverse engineering, malware analysis, and exploit payloads.</p>
+          <div class="link-list">
+            <a href="https://quickref.me/assembly" target="_blank">⚡ x86 Assembly QuickRef Cheat Sheet</a>
+            <a href="https://filippo.io/linux-syscall-table/" target="_blank">⚡ Linux x86_64 Syscall Reference Table</a>
+            <a href="https://en.wikipedia.org/wiki/Assembly_language" target="_blank">📖 Wikipedia Entry</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Universal Programming Languages Cheat Sheet & Wikipedia Directory -->
+      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:2rem; margin-top:2.5rem;">
+        <h3 style="color:#fff; margin-bottom:0.5rem;">🌐 Universal Programming Language Cheat Sheet Directory</h3>
+        <p style="color:var(--muted); font-size:0.9rem; margin-bottom: 1rem;">Click any language below to open its syntax cheat sheet and quick reference portal:</p>
+        
+        <div class="directory-grid">
+          <a href="https://quickref.me/ada" target="_blank" class="dir-link">
+            <strong>Ada</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://learnxinyminutes.com/docs/algol68/" target="_blank" class="dir-link">
+            <strong>ALGOL</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/assembly" target="_blank" class="dir-link">
+            <strong>Assembly</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/basic" target="_blank" class="dir-link">
+            <strong>BASIC</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/c" target="_blank" class="dir-link">
+            <strong>C</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/cpp" target="_blank" class="dir-link">
+            <strong>C++</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/cs" target="_blank" class="dir-link">
+            <strong>C#</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://learnxinyminutes.com/docs/cobol/" target="_blank" class="dir-link">
+            <strong>COBOL</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://learnxinyminutes.com/docs/fortran90/" target="_blank" class="dir-link">
+            <strong>FORTRAN</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/golang" target="_blank" class="dir-link">
+            <strong>Go (Golang)</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/java" target="_blank" class="dir-link">
+            <strong>Java</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/javascript" target="_blank" class="dir-link">
+            <strong>JavaScript</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/kotlin" target="_blank" class="dir-link">
+            <strong>Kotlin</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://learnxinyminutes.com/docs/lisp/" target="_blank" class="dir-link">
+            <strong>Lisp</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://learnxinyminutes.com/docs/pascal/" target="_blank" class="dir-link">
+            <strong>Pascal</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/perl" target="_blank" class="dir-link">
+            <strong>Perl</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/php" target="_blank" class="dir-link">
+            <strong>PHP</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/python" target="_blank" class="dir-link">
+            <strong>Python</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/ruby" target="_blank" class="dir-link">
+            <strong>Ruby</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/rust" target="_blank" class="dir-link">
+            <strong>Rust</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/sql" target="_blank" class="dir-link">
+            <strong>SQL</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/swift" target="_blank" class="dir-link">
+            <strong>Swift</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://quickref.me/typescript" target="_blank" class="dir-link">
+            <strong>TypeScript</strong>
+            <span class="sub">⚡ Cheat Sheet</span>
+          </a>
+          <a href="https://learnxinyminutes.com/" target="_blank" class="dir-link" style="grid-column: span 2; background: rgba(0,242,254,0.1); border-color: var(--accent);">
+            <strong style="color:var(--accent);">+ View Learn X in Y Minutes (All Languages) &rarr;</strong>
+            <span class="sub" style="color:var(--accent);">Full Index</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Embedded Code Snippets Section -->
+    <section id="cheatsheets">
+      <h2 class="section-title">⚡ Interactive In-Page Syntax Cheat Sheets</h2>
+      <p class="section-subtitle">Quick code snippets for instant copy & paste reference directly inside the app.</p>
+
+      <div class="grid">
+        <!-- Bash Snippet -->
+        <div class="cheat-card">
+          <div class="cheat-header">
+            <h3 style="color:#fff;">Bash Scripting</h3>
+            <span class="lang-badge">Automation</span>
+          </div>
+          <pre class="code-block"><code><span class="c">#!/bin/bash</span>
+NAME=<span class="s">"cyberX"</span>
+<span class="f">echo</span> <span class="s">"Target: $NAME"</span>
+
+<span class="k">if</span> [ <span class="s">"$NAME"</span> == <span class="s">"cyberX"</span> ]; <span class="k">then</span>
+    <span class="f">echo</span> <span class="s">"Access Granted"</span>
+<span class="k">fi</span>
+
+SERVERS=(<span class="s">"10.0.0.1"</span> <span class="s">"10.0.0.2"</span>)
+<span class="k">for</span> IP <span class="k">in</span> <span class="s">"${SERVERS[@]}"</span>; <span class="k">do</span>
+    ping -c 1 <span class="s">"$IP"</span> > /dev/null && <span class="f">echo</span> <span class="s">"$IP online"</span>
+<span class="k">done</span></code></pre>
+        </div>
+
+        <!-- Python Snippet -->
+        <div class="cheat-card">
+          <div class="cheat-header">
+            <h3 style="color:#fff;">Python 3</h3>
+            <span class="lang-badge">Scripting</span>
+          </div>
+          <pre class="code-block"><code>target = <span class="s">"127.0.0.1"</span>
+ports = [22, 80, 443]
+services = {22: <span class="s">"SSH"</span>, 80: <span class="s">"HTTP"</span>}
+
+<span class="k">def</span> <span class="f">audit_target</span>(ip, port_list):
+    <span class="k">for</span> p <span class="k">in</span> port_list:
+        name = services.get(p, <span class="s">"Unknown"</span>)
+        print(<span class="s">f"[{ip}] Port {p}: {name}"</span>)
+
+audit_target(target, ports)</code></pre>
+        </div>
+
+        <!-- Go Snippet -->
+        <div class="cheat-card">
+          <div class="cheat-header">
+            <h3 style="color:#fff;">Go (Golang)</h3>
+            <span class="lang-badge">Backend</span>
+          </div>
+          <pre class="code-block"><code><span class="k">package</span> main
+<span class="k">import</span> (<span class="s">"fmt"</span>; <span class="s">"net"</span>)
+
+<span class="k">func</span> <span class="f">main</span>() {
+    addr := <span class="s">"127.0.0.1:80"</span>
+    conn, err := net.Dial(<span class="s">"tcp"</span>, addr)
+    <span class="k">if</span> err != nil {
+        fmt.Printf(<span class="s">"Closed\n"</span>)
+        <span class="k">return</span>
+    }
+    conn.Close()
+    fmt.Printf(<span class="s">"Open!\n"</span>)
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Author Statement & Footer -->
+  <footer>
+    <div class="author-box">
+      <h3>✍️ Website Author & Founder Statement</h3>
+      <p>This platform, <strong>cyberX</strong>, was designed and compiled by the <strong>cyberX Was Design By Jonathan Decker</strong> as a comprehensive, free-access educational repository for students and enthusiasts exploring Operating Systems, Programming Languages, and Cybersecurity.</p>
+    </div>
+
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>🪟 Windows & Mobile Downloads</h4>
+        <ul>
+          <li><a href="https://www.microsoft.com/software-download/windows11" target="_blank">Windows 11 ISO</a></li>
+          <li><a href="https://www.microsoft.com/software-download/windows10" target="_blank">Windows 10 ISO</a></li>
+          <li><a href="https://developer.android.com/about/versions" target="_blank">Android OS Source</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>🐧 Linux & Security Distributions</h4>
+        <ul>
+          <li><a href="https://www.kali.org/get-kali/" target="_blank">Kali Linux ISO</a></li>
+          <li><a href="https://parrotsec.org/download/" target="_blank">Parrot Security ISO</a></li>
+          <li><a href="https://ubuntu.com/download/desktop" target="_blank">Ubuntu Desktop ISO</a></li>
+          <li><a href="https://www.debian.org/distrib/" target="_blank">Debian GNU/Linux ISO</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>🍎 Apple & BSD Unix</h4>
+        <ul>
+          <li><a href="https://support.apple.com/downloads/macos" target="_blank">macOS Download Center</a></li>
+          <li><a href="https://www.freebsd.org/where/" target="_blank">FreeBSD Unix ISO</a></li>
+          <li><a href="https://www.openbsd.org/faq/faq3.html" target="_blank">OpenBSD OS ISO</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      <p>&copy; 2026 <strong>cyberX</strong>. Author: Author Of cyberX is Jonathan Decker. Dedicated to open knowledge across computer science and cybersecurity.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
